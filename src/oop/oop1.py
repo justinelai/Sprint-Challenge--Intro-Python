@@ -18,10 +18,11 @@
 #
 # Put a comment noting which class is the base class
 
-## BASE CLASS
+### BASE CLASS
 class Vehicle:
     pass
-# VEHICLE CLASS
+
+## VEHICLE CLASS
 class GroundVehicle(Vehicle):
     pass
 class FlightVehicle(Vehicle):
