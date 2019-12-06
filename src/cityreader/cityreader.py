@@ -7,6 +7,9 @@ class City:
     self.lat = lat
     self.lon = lon
 
+  def __str__(self):
+    return f'{self.name} ({self.lat}, {self.lon})'
+
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
 #
@@ -21,26 +24,24 @@ class City:
 # should not be loaded into a City object.
 import csv 
 
-with open('cities.csv', newline='') as sprintfile:
-  contents = csv.reader(sprintfile)
-  for row in contents:
-    print(row)
-
-
 cities = []
 
 def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-    return cities
+  with open('cities.csv', newline='') as sprintfile:
+    citymaker = csv.DictReader(sprintfile, delimiter=",")
+    for k in citymaker:
+      cities.append(City(k['city'],k['lat'],k['lng']))
 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
-    print(c)
+  print(c)
 
+"""
 # STRETCH GOAL!
 #
 # Allow the user to input two points, each specified by latitude and longitude.
@@ -81,3 +82,5 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # the specified coordinates.
 
   return within
+
+"""
