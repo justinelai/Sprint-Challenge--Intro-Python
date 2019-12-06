@@ -26,20 +26,33 @@ import csv
 
 cities = []
 
+"""
+
+#First Solution: Seems to be working but fails the unit test.
+
 def cityreader(cities=[]):
-  # TODO Implement the functionality to read from the 'cities.csv' file
-  # For each city record, create a new City instance and add it to the 
-  # `cities` list
-  with open('cities.csv', newline='') as sprintfile:
-    citymaker = csv.DictReader(sprintfile, delimiter=",")
+  with open('cities.csv') as sprintfile:
+    citymaker = csv.DictReader(sprintfile)
     for k in citymaker:
       cities.append(City(k['city'],k['lat'],k['lng']))
+"""
+
+#Second Solution: Also seems to be working but fails the unit test.
+
+def cityreader(cities=[]):
+  with open('cities.csv') as sprintfile:
+    citymaker = csv.reader(sprintfile)
+    next(citymaker)
+    for line in citymaker:
+      cities.append(City(line[0], line[3], line[4]))
+    return cities
 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
   print(c)
+  # print(isinstance(c, City))
 
 """
 # STRETCH GOAL!
